@@ -29,14 +29,14 @@ public class MovieCast {
 
     private String role;
 
-    private int age;
+    private Integer age;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
     @Builder
-    public MovieCast(String name, String role, int age, Movie movie) {
+    public MovieCast(String name, String role, Integer age, Movie movie) {
         this.name = name;
         this.role = role;
         this.age = age;

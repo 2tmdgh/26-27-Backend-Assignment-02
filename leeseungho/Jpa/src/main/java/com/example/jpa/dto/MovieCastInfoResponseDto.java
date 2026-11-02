@@ -8,7 +8,7 @@ public record MovieCastInfoResponseDto(
         Long id,
         String name,
         String role,
-        int age,
+        Integer age,
         Long movieId,
         String title
 ) {

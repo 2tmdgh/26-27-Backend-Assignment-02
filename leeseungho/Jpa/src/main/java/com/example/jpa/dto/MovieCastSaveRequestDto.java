@@ -4,6 +4,6 @@ public record MovieCastSaveRequestDto(
         Long movieId,
         String name,
         String role,
-        int age
+        Integer age
 ) {
 }
