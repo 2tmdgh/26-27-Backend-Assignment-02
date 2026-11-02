@@ -33,7 +33,7 @@ public class Movie {
     private String editor;
 
     @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Actor> actors = new ArrayList<>();
+    private List<MovieCast> movieCasts = new ArrayList<>();
 
     @Builder
     public Movie(String movieName, String editor) {

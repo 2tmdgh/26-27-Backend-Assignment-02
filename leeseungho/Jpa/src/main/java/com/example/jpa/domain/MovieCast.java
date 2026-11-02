@@ -15,10 +15,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "actors")
+@Table(name = "movieCasts")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Actor {
+public class MovieCast {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,15 +36,25 @@ public class Actor {
     private Movie movie;
 
     @Builder
-    public Actor(String name, String role, int age, Movie movie) {
+    public MovieCast(String name, String role, int age, Movie movie) {
         this.name = name;
         this.role = role;
-        this.movie = movie;
         this.age = age;
+        this.movie = movie;
     }
 
-    public void update(String name, String role) {
-        this.name = name;
-        this.role = role;
+    public void update(String name, String role, Integer age, Movie movie) {
+        if (name != null) {
+            this.name = name;
+        }
+        if (role != null) {
+            this.role = role;
+        }
+        if (age != null) {
+            this.age = age;
+        }
+        if (movie != null) {
+            this.movie = movie;
+        }
     }
 }

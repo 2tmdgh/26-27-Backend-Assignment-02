@@ -1,6 +1,6 @@
 package com.example.jpa.dto;
 
-public record ActorSaveRequestDto(
+public record MovieCastSaveRequestDto(
         Long movieId,
         String name,
         String role,
