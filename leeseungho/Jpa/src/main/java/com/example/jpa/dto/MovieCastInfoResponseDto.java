@@ -10,7 +10,7 @@ public record MovieCastInfoResponseDto(
         String role,
         int age,
         Long movieId,
-        String movieName
+        String title
 ) {
 
     public static MovieCastInfoResponseDto from(MovieCast movieCast) {
@@ -20,7 +20,7 @@ public record MovieCastInfoResponseDto(
                 .role(movieCast.getRole())
                 .age(movieCast.getAge())
                 .movieId(movieCast.getMovie().getId())
-                .movieName(movieCast.getMovie().getMovieName())
+                .title(movieCast.getMovie().getTitle())
                 .build();
     }
 }

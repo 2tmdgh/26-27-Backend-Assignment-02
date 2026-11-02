@@ -6,14 +6,14 @@ import lombok.Builder;
 @Builder
 public record MovieInfoResponseDto(
         Long id,
-        String movieName,
+        String title,
         String editor
 ) {
 
     public static MovieInfoResponseDto from(Movie movie) {
         return MovieInfoResponseDto.builder()
                 .id(movie.getId())
-                .movieName(movie.getMovieName())
+                .title(movie.getTitle())
                 .editor(movie.getEditor())
                 .build();
     }

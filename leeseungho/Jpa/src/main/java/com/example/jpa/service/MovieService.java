@@ -19,7 +19,7 @@ public class MovieService {
     @Transactional
     public MovieInfoResponseDto saveMovie(MovieSaveRequestDto movieSaveRequestDto) {
         Movie movie = Movie.builder()
-                .movieName(movieSaveRequestDto.movieName())
+                .title(movieSaveRequestDto.title())
                 .editor(movieSaveRequestDto.editor())
                 .build();
 

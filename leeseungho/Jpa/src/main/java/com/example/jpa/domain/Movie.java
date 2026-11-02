@@ -28,7 +28,7 @@ public class Movie {
     private Long id;
 
     @Column(nullable = false)
-    private String movieName;
+    private String title;
 
     private String editor;
 
@@ -36,8 +36,8 @@ public class Movie {
     private List<MovieCast> movieCasts = new ArrayList<>();
 
     @Builder
-    public Movie(String movieName, String editor) {
-        this.movieName = movieName;
+    public Movie(String title, String editor) {
+        this.title = title;
         this.editor = editor;
     }
 }
