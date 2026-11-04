@@ -1,7 +1,7 @@
 package com.example.jpa.service;
 
-import com.example.jpa.domain.MovieCast;
 import com.example.jpa.domain.Movie;
+import com.example.jpa.domain.MovieCast;
 import com.example.jpa.dto.MovieCastInfoResponseDto;
 import com.example.jpa.dto.MovieCastSaveRequestDto;
 import com.example.jpa.dto.MovieCastUpdateRequestDto;
@@ -20,10 +20,19 @@ public class MovieCastService {
     private final MovieCastRepository movieCastRepository;
     private final MovieRepository movieRepository;
 
+    private Movie findMovieById(Long movieId) {
+        return movieRepository.findById(movieId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 영화입니다."));
+    }
+
+    private MovieCast findMovieCastById(Long movieCastId) {
+        return movieCastRepository.findById(movieCastId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 배우에 대한 정보를 찾을 수 없습니다."));
+    }
+
     @Transactional
     public MovieCastInfoResponseDto saveMovieCast(MovieCastSaveRequestDto movieCastSaveRequestDto) {
-        Movie movie = movieRepository.findById(movieCastSaveRequestDto.movieId())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 영화입니다."));
+        Movie movie = findMovieById(movieCastSaveRequestDto.movieId());
 
         MovieCast movieCast = MovieCast.builder()
                 .name(movieCastSaveRequestDto.name())
@@ -37,11 +46,6 @@ public class MovieCastService {
         return MovieCastInfoResponseDto.from(movieCast);
     }
 
-    private MovieCast findMovieCastById(Long movieCastId) {
-        return movieCastRepository.findById(movieCastId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 배우에 대한 정보를 찾을 수 없습니다."));
-    }
-
     @Transactional(readOnly = true)
     public MovieCastInfoResponseDto getMovieCast(Long movieCastId) {
         MovieCast movieCast = findMovieCastById(movieCastId);
@@ -51,12 +55,14 @@ public class MovieCastService {
     @Transactional
     public MovieCastInfoResponseDto updateMovieCast(Long movieCastId, MovieCastUpdateRequestDto requestDto) {
         MovieCast movieCast = findMovieCastById(movieCastId);
+
         Movie updateMovie = null;
         if (requestDto.movieId() != null) {
-            updateMovie = movieRepository.findById(requestDto.movieId())
-                    .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 영화입니다."));
+            updateMovie = findMovieById(requestDto.movieId());
         }
+
         movieCast.update(requestDto.name(), requestDto.role(), requestDto.age(), updateMovie);
+
         return MovieCastInfoResponseDto.from(movieCast);
     }
 
